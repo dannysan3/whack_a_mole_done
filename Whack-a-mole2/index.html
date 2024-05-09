@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html language="no">
+<head>
+    <title>Tutorial</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="mole.css">
+    <script src="mole.js"></script>
+</head>
+<body>
+    <h1>Whack A Mole </h1>
+    <button id="start" onclick="visStart('tutorial')">Startside</button>
+    <br>
+    <button id="nivå1" class="nivåKnapp" onclick="visNivå('nivå1')">Nivå 1</button>
+    <button id="nivå2" class="nivåKnapp" onclick="visNivå('nivå2')">Nivå 2</button>
+    <br>
+    <h2 id="score">0</h2>
+    <div id="startside">
+        <svg id="tutorial-innhold" width="540px" height="540px">
+            <image class="pipeTutorial" href="bilder/pipe.png" x="105" y="230" height="250" ></image>
+            <image class="pipeTutorial" href="bilder/pipe.png" x="330" y="230" height="250" ></image>
+            <image id="planteTut" class="figur" href="bilder/djevel.png" x="63" y="180" ></image>
+            <image id="blomstTut" class="figur" href="bilder/engel.png" x="295" y="180" height="200" ></image>
+            <image id="planteKlikk" class="klikk" href="bilder/Klikk.png" x="100" y="195" ></image>
+            <image id="blomstKlikk" class="klikk" href="bilder/Klikk.png" x="320" y="195"></image>
+            <image id="planteNei" class="klikk" href="bilder/NEI.png" x="60" y="195" ></image>
+            <image id="blomstJa" class="klikk" href="bilder/JA.png" x="310" y="195"></image>
+        </svg>
+    </div>
+    <div id="nivå1-innhold" style="display: none;">
+        <svg id="brett1" width="540px" height="540px">
+            <image id="pipe1" class="pipe" href="bilder/pipe.png" x="40" y="40" height="250" ></image>
+            <image id="pipe2" class="pipe" href="bilder/pipe.png" x="220" y="40" height="250"></image>
+            <image id="pipe3" class="pipe" href="bilder/pipe.png" x="400" y="40" height="250" ></image>
+            <image id="pipe4" class="pipe" href="bilder/pipe.png" x="40" y="200" height="250"></image>
+            <image id="pipe5" class="pipe" href="bilder/pipe.png" x="220" y="200" height="250" ></image>
+            <image id="pipe6" class="pipe" href="bilder/pipe.png" x="400" y="200" height="250"></image>
+            <image id="pipe7" class="pipe" href="bilder/pipe.png" x="40" y="380" height="250" ></image>
+            <image id="pipe8" class="pipe" href="bilder/pipe.png" x="220" y="380" height="250"></image>
+            <image id="pipe9" class="pipe" href="bilder/pipe.png" x="400" y="380" height="250"></image>
+            <image id="p1" class="plante" href="bilder/plante.png" x="0" y="-200" visibility="hidden"></image>
+            <image id="b1" class="blomst" href="bilder/blomst.png" x="0" y="-100" visibility="hidden"></image>
+        </svg>
+    </div>
+    <div id="nivå2-innhold" style="display: none;">
+        <svg id="brett2" width="540px" height="540px">
+            <image id="pipe1" class="pipe" href="bilder/pipe.png" x="40" y="40" height="250" ></image>
+            <image id="pipe2" class="pipe" href="bilder/pipe.png" x="220" y="40" height="250"></image>
+            <image id="pipe3" class="pipe" href="bilder/pipe.png" x="400" y="40" height="250" ></image>
+            <image id="pipe4" class="pipe" href="bilder/pipe.png" x="40" y="200" height="250"></image>
+            <image id="pipe5" class="pipe" href="bilder/pipe.png" x="220" y="200" height="250" ></image>
+            <image id="pipe6" class="pipe" href="bilder/pipe.png" x="400" y="200" height="250"></image>
+            <image id="pipe7" class="pipe" href="bilder/pipe.png" x="40" y="380" height="250" ></image>
+            <image id="pipe8" class="pipe" href="bilder/pipe.png" x="220" y="380" height="250"></image>
+            <image id="pipe9" class="pipe" href="bilder/pipe.png" x="400" y="380" height="250"></image>
+            <image id="p1" class="plante" href="bilder/plante.png" x="0" y="-200" visibility="hidden"></image>
+            <image id="p2" class="plante" href="bilder/plante.png" x="0" y="-100" visibility="hidden"></image>
+            <image id="b1" class="blomst" href="bilder/blomst.png" x="0" y="-100" visibility="hidden"></image>
+        </svg>
+    </div>
+    
+</body>
+</html>

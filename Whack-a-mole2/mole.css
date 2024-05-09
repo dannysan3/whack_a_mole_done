@@ -1,0 +1,104 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background:url("bilder/bakgrunn.png");
+    background-size: cover;
+}
+
+#game-over-box {
+    display: none;
+    position: fixed;
+    z-index: 3; 
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%, -50%);
+    border: 2px solid black; 
+    background-color: grey; 
+    padding: 20px; 
+    max-width: 400px; 
+}
+
+svg{
+    background:url("bilder/brett.png");
+    background-size: cover;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+.figur{
+    width: 200px;
+    height: 125px;
+}
+
+/*.blomst{
+    width: 200px;
+    height: 100px;
+}
+*/
+/*#start{
+    margin: 20px;
+}*/
+
+.klikk{
+    width: 200px;
+    height: 100px;
+}
+
+.pipe{
+    width: 120px;
+    height: 130px;
+}
+.pipeTutorial{
+    width: 120px;
+    height: 130px;
+}
+
+#score{
+    color: #f2f2f2;
+}
+
+#score-table {
+    position: absolute;
+    top: 40px; 
+    right: 50px; 
+    border-collapse: collapse;
+    border: 2px solid black;
+    background-color: #f2f2f2;
+    font-family: Arial, Helvetica, sans-serif; 
+    z-index: 2;
+}
+
+#score-table caption {
+    font-weight: bold;
+    padding: 8px;
+    font-size: 20px;
+}
+
+#score-table th, #score-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+#start {
+    border: none;
+    background-color:deepskyblue;
+    color: white;
+    font-size: 90%;
+    margin: 0px 15px 10px 15px;
+    border: 3px solid rgb(127, 149, 126);
+    width: 100px;
+    font-weight: bold;
+}
+
+.nivåKnapp{
+    border: none;
+    background-color:deepskyblue;
+    color: white;
+    font-size: 90%;
+    margin: 0px 15px 10px 15px;
+    border: 3px solid rgb(127, 149, 126);
+    width: 100px;
+    font-weight: bold;
+}
