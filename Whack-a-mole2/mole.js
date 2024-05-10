@@ -1,80 +1,138 @@
-let engel;
-let djevel;
+let engel = document.getElementById("e1");
+let djevel = document.getElementById("d1");
 let sisteTall = -1;
 let piper = [];
 let score = 0;
 let timer;
 let intervallId;
 let intervalVarighet = 2000; // Initial interval duration
+let harStartet = false
+let currentNivå;
 
-function oppstart() {
-    intervallId = setInterval(engelNaa, intervalVarighet);
-    piper1 = document.getElementsByClassName("pipe1");
-    piper2 = document.getElementsByClassName("pipe2")
-    console.log(piper);
-}
-/*function visStart() {
-    document.getElementById('start').style.display = 'none';
-    document.getElementById('tutorial').style.display = 'block';
-}*/
 
 function visNivå(nivå) {
-    // Skjul alle nivåer
-    document.getElementById('nivå1-innhold').style.display = 'none';
-    document.getElementById('nivå2-innhold').style.display = 'none';
-    document.getElementById('startside').style.display = 'none';
-    //document.getElementById('start').style.display = 'none';
-    // Vis valgt nivå
-    document.getElementById(nivå + '-innhold').style.display = 'block';
-    // Start riktig funksjonalitet for det valgte nivået
+   
+    spanNivå = document.getElementById("nivaa-span")
     if (nivå === 'nivå1') {
-        startNivå1();
+        document.getElementById('startside').style.display = 'none';
+        document.getElementById('nivå1-innhold').style.display = 'block';
+        spanNivå.textContent ="Nivå 1"
+        startNivå1()
     }
     else if (nivå === 'nivå2') {
-        startNivå2();
+        document.getElementById('nivå1-innhold').style.display = 'block';
+        document.getElementById('startside').style.display = 'none';
+        spanNivå.textContent ="Nivå 2"
+        startNivå2()
     }
 }
 
-function visStart(start){
-    // Skjul alle nivåer
+function visStart(){
+    // Skjul nivåer og vis start side
     document.getElementById('nivå1-innhold').style.display = 'none';
-    document.getElementById('nivå2-innhold').style.display = 'none';
-    //document.getElementById('startside').style.display = 'none';
-    
-    // Vis valgt startside
-    if (start === 'tutorial') {
-        document.getElementById(start+'innhold').style.display = 'block';
-    }
-    // Start riktig funksjonalitet for den valgte starten
-    if (start === 'start') {
-        startStart();
-    }
-}
-
-function randomBrikke() {
-    let ind;
-    do {
-        ind = Math.floor(Math.random() * piper.length);
-    } while (ind === sisteTall);
-    sisteTall = ind;
-    return piper[ind];
+    document.getElementById('startside').style.display = 'block';
+    document.getElementById("nivå-span").textContent = "Nivå : "
+    restartAlt()
+   
 }
 
 function startNivå1() {
-    document.getElementById('brett1').innerHTML = '';
-    let brett1 = document.getElementById('brett1');
- 
+    restartAlt()
+    intervallId = setInterval(engelNaa, intervalVarighet);
+    currentNivå = "nivå1"
+  
 }
 
 function startNivå2() {
-
-    document.getElementById('brett2').innerHTML = '';
-    let brett2 = document.getElementById('brett2');
+    restartAlt()
+    intervallId = setInterval(engelNaa2, intervalVarighet);
+    currentNivå = "nivå2"
+  
 }
 
-function startStart(){
-    document.getElementById('tutorial').innerHTML = '';
-    let brett2 = document.getElementById('tutorial');
+function engelNaa2(){
+
+    let harKlikket = false
+
+    engelNaa()
+
+    if (intervalVarighet > 1100 && harStartet) {
+        intervalVarighet -= 100;
+        clearInterval(intervallId);
+        intervallId = setInterval(engelNaa2, intervalVarighet);
+    }
+
+    //Hvis brukeren har startet spillet, og ikke klikket på en figur før den bytter plass, mister bruker poeng
+    if (harStartet && !harKlikket) { 
+        score -= 25; //taper 25 poeng hver gang han ikke trykker på
+        if (score < 0){ //Hvis bruker får - poeng taper bruker
+            score = 0
+            gameOver()
+        }
+        document.getElementById("score").innerHTML = score;
+    }
+   
+   
+    harKlikket = false;
+}
+
+function engelNaa() {
+
+    // Henter alle piper
+    let pipeElements = document.getElementsByClassName("pipe");
+
+    
+    //Trekker tilfeldig pipe og oppdaterer fiugerene
+    let pipeId = randomBrikke(pipeElements);
+    let pipeId2= randomBrikke(pipeElements);
+    engel = document.getElementById("e1");
+    djevel = document.getElementById("d1");
+
+    let pipeElement = document.getElementById(pipeId);
+    let pipeElement2 = document.getElementById(pipeId2);
+    oppdaterPos(engel, pipeElement);
+    oppdaterPos(djevel, pipeElement2);
+    
+}
+function oppdaterPos(element, pipeElement) {
+    element.setAttribute("x", pipeElement.getAttribute("x"));
+    element.setAttribute("y", pipeElement.getAttribute("y"));
+    element.style.visibility = "visible";
+}
+
+
+function randomBrikke(pipeElements) {
+    
+
+    var randomIndex;
+    //sørger for at de ikke får lik tall djevel og engel
+    do {
+        randomIndex = Math.floor(Math.random() * pipeElements.length);
+    } while (randomIndex === sisteTall); 
+
+    sisteTall = randomIndex;
+
+    var randomPipe = pipeElements[randomIndex];
+
+    return randomPipe.id;
+}
+
+
+function spillIgjen() {
+    let gameOverBox= document.getElementById("game-over-box");
+    gameOverBox.style.display = "none";
+    score = 0;
+    highScore = 0
+    harStartet = false
+    intervalVarighet = 2000; 
+    document.getElementById("score").innerHTML = score;
+
+    //Sjekker hvilket nivå man spiller på
+    if (currentNivå == "nivå1"){ 
+        startNivå1()
+    }else{
+        startNivå2()
+    }
 }
 
 function gameOver() {
@@ -83,20 +141,72 @@ function gameOver() {
     let gameOverBox = document.getElementById("game-over-box");
     gameOverBox.style.display = "block";
     let rundeScoreSpan = document.getElementById("rundeScore");
-    rundeScoreSpan.textContent = score;
+    rundeScoreSpan.textContent = highScore;
 
     // Henter highscore tabellen og legger til ny rad
-    let table = document.getElementById("score-table");
-    let newRow = table.insertRow(-1); 
-    let cell1 = newRow.insertCell(0); 
-    let cell2 = newRow.insertCell(1); 
-    let currentDate = new Date();
-    cell1.textContent = currentDate.toLocaleTimeString() 
-    cell2.textContent = score ;
-    //Stopper timer slik at figurNaa blir kalt
+    let tabell = document.getElementById("score-tabell");
+    let nyRad = tabell.insertRow(-1); 
+    let datoKol = nyRad.insertCell(0); 
+    let poengKol = nyRad.insertCell(1); 
+    let nivåKol = nyRad.insertCell(2); 
+    let dato = new Date();
+    datoKol.textContent = dato.toLocaleTimeString() 
+    poengKol.textContent = highScore;
+    nivåKol.textContent = currentNivå
+    
+    //Stopper timer slik at Engel ikke blir kalt
     clearInterval(intervallId)
-
-    //Skjuler planter
+    //Skjuler figuerer
     engel.style.visibility = "hidden";
     djevel.style.visibility = "hidden";
 }
+
+//Brukes når man bytter fra start til nivå, eller nivå til nivå
+function restartAlt(){
+    engel = document.getElementById("e1");
+    djevel = document.getElementById("d1");
+    clearInterval(intervallId)
+    harStartet = false
+    intervalVarighet = 2000; 
+
+
+    //Skjuler figuerer
+    engel.style.visibility = "hidden";
+    djevel.style.visibility = "hidden";
+    score = 0
+    highScore = 0
+    document.getElementById("score").innerHTML = score;
+    currentNivå = ""
+
+}
+
+
+document.addEventListener("DOMContentLoaded", function() {
+
+    engel = document.getElementById("e1")
+    djevel = document.getElementById("d1")
+
+
+    //Hvis man klikker blomst får man poeng
+    engel.addEventListener("click", function() {
+        score += 100
+        if (score > highScore){ //sjekker om score nå er større enn vi har fått til nå
+            highScore = score
+        }
+        document.getElementById("score").innerHTML = score;
+        harStartet = true
+    });
+
+    //Hvis man trykker planete dør man
+    djevel.addEventListener("click", function() {
+        gameOver()
+    });
+
+
+});
+
+
+
+
+
+

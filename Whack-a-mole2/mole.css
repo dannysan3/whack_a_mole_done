@@ -5,6 +5,12 @@ body{
     background-size: cover;
 }
 
+#nivaa-span {
+    font-size: 20px; 
+    color: #808080; 
+    
+}
+
 #game-over-box {
     display: none;
     position: fixed;
@@ -31,14 +37,18 @@ svg{
     height: 125px;
 }
 
-/*.blomst{
+.engel{
     width: 200px;
     height: 100px;
 }
-*/
+.djevel{
+    width: 200px;
+    height: 100px;
+}
+
 /*#start{
     margin: 20px;
-}*/
+} */
 
 .klikk{
     width: 200px;
@@ -58,7 +68,7 @@ svg{
     color: #f2f2f2;
 }
 
-#score-table {
+#score-tabell {
     position: absolute;
     top: 40px; 
     right: 50px; 
@@ -69,13 +79,13 @@ svg{
     z-index: 2;
 }
 
-#score-table caption {
+#score-tabell caption {
     font-weight: bold;
     padding: 8px;
     font-size: 20px;
 }
 
-#score-table th, #score-table td {
+#score-tabell th, #score-tabell td {
     border: 1px solid black;
     padding: 8px;
     text-align: left;
